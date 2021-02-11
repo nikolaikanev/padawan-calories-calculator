@@ -31,12 +31,12 @@ const renderTable = (rows) => {
     let afterMealSpace = emptySpace(" ", 20 - meal.length)
     let afterGramsSpace = emptySpace(" ", 20 - grams.length)
     let afterDateSpace = emptySpace(" ", 20 - date.length)
-    let bbb = emptySpace("-", 63)
+    let separatorLine = emptySpace("-", 63)
 
     let firstRow = meal + afterMealSpace + "|" + grams + afterGramsSpace + "|" + date + afterDateSpace + "|"
     
     console.log(firstRow)
-    console.log(bbb)
+    console.log(separatorLine)
      
 
     for(i = 0; i < exampleRows.length; i = i + 1) {
