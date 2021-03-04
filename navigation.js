@@ -1,3 +1,5 @@
+const tty = require('tty')
+const readline = require('readline')
 const emptySpace = (space, times) => {
   let result = ""
   for(let i = 0; i < times; i = i + 1) {
@@ -5,18 +7,10 @@ const emptySpace = (space, times) => {
   }
   return result
 }
-console.log(emptySpace(" ", 200))
-console.log(emptySpace(" ", 35) + "Home page" + emptySpace(" ", 35))
-console.log(emptySpace(" ", 1500))
-// console.log(Array(process.stdout.rows + 1).join('\n'));
-const readline = require('readline')
-
-
-
-
-
-
-
+// console.log(emptySpace(" ", 200))
+// console.log(emptySpace(" ", 35) + "Home page" + emptySpace(" ", 35))
+// console.log(emptySpace(" ", 1500))
+// // console.log(Array(process.stdout.rows + 1).join('\n'));
 
 const nav = () => {
   let Quit = "Q"
@@ -27,8 +21,6 @@ const nav = () => {
 }
 
 console.log(nav())
-
-readline.emitKeypressEvents(process.stdin)
 process.stdin.setRawMode(true)
 
 const READLINE = require('readline');
@@ -49,6 +41,4 @@ process.stdin.on('keypress', function (_chunk, key) {
     console.log(nav())
   }
 })
- 
-
 

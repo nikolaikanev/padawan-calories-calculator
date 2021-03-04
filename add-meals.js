@@ -1,33 +1,22 @@
 // for inner arrays index 1 is calories for 100g
-const exampleRows = [ 
-  ['pork meat', 670],
-  ['tomatos', 400],
-  ['yogurt', 300],
-  ['oats', 300],
-  ['onion', 490],
-  ['orange', 900],
-  ['banana', 100],
-  ['bread', 400],
-  ['icecream', 300],
-  ['lime', 300],
-  ['potato',99],
-  ['tuna fish', 350],
-  ['grapes', 100],
-]
-
-
+const parse = require('csv-parse/lib/sync')
+const fs = require('fs');
+const { get } = require('http');
 const readline = require("readline");
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
-});
+})
+const renderTableObj = require('./functions.js')
+const renderTable = renderTableObj['renderTable']
+
 
 
 let searchAnswers = []
-const findMeals = (mealSearch) => {
-  for(i = 0; i < exampleRows.length; i = i + 1){
-    if ( exampleRows[i][0].includes(mealSearch)) {
-      searchAnswers.push(exampleRows[i][0])
+const findFoods = (foodSearch) => {
+  for(i = 0; i < foods.length; i = i + 1){
+    if ( foods[i][1].includes(foodSearch)) {
+      searchAnswers.push(foods[i][1])
     }
   }
   return searchAnswers
@@ -45,27 +34,51 @@ const mealCallback = (choice) => {
   let choiceNumber = Number(choice)
   for(i = 0; i < searchAnswers.length; i = i + 1) {
     if (choiceNumber === i + 1) {
-      console.log(searchAnswers[i] + " " + "was saved")
       const fs = require('fs');
-      let csvRoll = searchAnswers[i] + "," + quantitysave + "\n"
-      fs.appendFileSync("text2.txt", csvRoll, "UTF-8",{'flags': 'a+'});
-
+      let csvRoll ='"' + searchAnswers[i] + '"' + "," + quantitysave + "\n"
+      fs.appendFileSync("meals.csv", csvRoll, "UTF-8",{'flags': 'a+'});
+      renderTable(getmeals(), ["meal", "grams"])
     }
   }
 }
 
+const getFoods = () => {
+  const data = fs.readFileSync('foods_database - ABBREV.csv', 'utf8')
+  const records = parse(data, {
+    skip_empty_lines: true
+  })
+return records
+}
+
+let foods = getFoods()
+
+const getmeals = () => {
+  const data = fs.readFileSync('meals.csv', 'utf8')
+  const records = parse(data, {
+    // columns: true,
+    skip_empty_lines: true
+  })
+
+  return records
+}
+
 
 const searchMealCallback = (mealSearch) => {
-  let foundMeals = findMeals(mealSearch)
+  let foundFoods = findFoods(mealSearch)
   let productNumber = 0
-  for(i = 0; i < foundMeals.length; i = i + 1) {
+  for(i = 0; i < foundFoods.length; i = i + 1) {
     productNumber = 1 + productNumber
-    let result = foundMeals[i]
-    console.log(productNumber.toString() + result)
+    let result = foundFoods[i]
+    console.log(productNumber.toString()+ "-" + result)
   }
   rl.question("Choose number ", mealCallback)
 }
 
-rl.question("Enter quantity ", quantityCallback)
+const addMeal = () => {
+  rl.question("Enter quantity ", quantityCallback)
+}
 
 
+module.exports = {
+  'addMeal': addMeal
+}
