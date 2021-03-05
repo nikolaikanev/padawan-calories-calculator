@@ -41,10 +41,10 @@ const enrichingMeals = (foods) => {
     for (let j = 0; j < foods.length; j = j + 1) {
       let food = foods[j]
       if (meal[0] === food[0]) {
-        let resultCal = food[1] * (meal[2] / 100)
-        let resultPro = food[2] * (meal[2] / 100)
-        let resultCarbs = food[3] * (meal[2] / 100)
-        let resultFat = food[4] * (meal[2] / 100)
+        let resultCal = food[1] * (meal[1] / 100)
+        let resultPro = food[2] * (meal[1] / 100)
+        let resultCarbs = food[3] * (meal[1] / 100)
+        let resultFat = food[4] * (meal[1] / 100)
         arr.push([meal[0], food[0], Math.round(resultCal), Math.round(resultPro), Math.round(resultCarbs), Math.round(resultFat)])
 
       }

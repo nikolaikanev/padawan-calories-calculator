@@ -8,6 +8,8 @@ const fs = require('fs');
 const parse = require('csv-parse/lib/sync')
 const mainPageObj = require("./main-page.js")
 const mainPage = mainPageObj['mainPage']
+const mealsPageObj = require("./meals-page.js")
+const mealsPage = mealsPageObj['mealsPage']
 
 
 const emptySpace = (space, times) => {
@@ -43,7 +45,16 @@ const run = () => {
             console.log(emptySpace(" ", 2000))
             renderPage(addMeal)
         }
-    })
+        // Show "M" in navigation
+        // Fix Meals table
+        // Use renderPage for the below
+        if (key && key.shift && key.name == 'm') {
+          console.clear()
+          mealsPage()
+          console.log(emptySpace(" ", 500))
+          console.log(nav())
+        }
+      })
 
     renderPage(mainPage)
 }
