@@ -2,25 +2,13 @@
 
 const renderTable = (rows, headers) => {
     let separatorLine = emptySpace("-", headers.length * 14 + 6)
-    console.log(separatorLine)
+    
     let firstRow = "|"
     for(let i = 0; i < headers.length; i = i + 1) {
         let header = headers[i]
         let afterHeaderSpace = emptySpace(" ", 14- header.length)
         firstRow = firstRow + header + afterHeaderSpace + "|"
     }
-
-    
-// function clear() {
-//     READLINE.cursorTo(process.stdout, 0, 0);
-//     READLINE.clearLine(process.stdout, 0);
-//     READLINE.clearScreenDown(process.stdout);
-// }   
-
-    
-//     console.log(clear())
-    console.log(firstRow)
-    console.log(separatorLine)
     
     for (let i = 0; i < rows.length; i = i + 1) {
         let row = rows[i]
@@ -36,13 +24,13 @@ const renderTable = (rows, headers) => {
                 
             }
             line = line + row[j] + afterRowSpace + "|"
-
+            
         }
 
         console.log(line)
     }
 
-
+    
     console.log(separatorLine)
 }
 
@@ -57,4 +45,3 @@ const emptySpace = (space, times) => {
 module.exports = {
     'renderTable': renderTable
 }
-

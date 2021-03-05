@@ -50,15 +50,6 @@ const emptySpace = (space, times) => {
   readline.emitKeypressEvents(process.stdin)
   process.stdin.setRawMode(true)
   
-  const READLINE = require('readline');
-  
-  function clear() {
-      READLINE.cursorTo(process.stdout, 0, 0);
-      READLINE.clearLine(process.stdout, 0);
-      READLINE.clearScreenDown(process.stdout);
-  }
-  
-  
   process.stdin.on('keypress', function (_chunk, key) {
     if (key && key.shift && key.name == 'q') process.exit()
     if (key && key.shift && key.name == 'a') {
