@@ -2,7 +2,7 @@
 
 const renderTable = (rows, headers) => {
   const cellLength = 20
-  let separatorLine = emptySpace("-", headers.length * cellLength + 6);
+  let separatorLine = emptySpace("-", headers.length * (cellLength + 1) + 1);
 
   let firstRow = "|";
   for (let i = 0; i < headers.length; i = i + 1) {

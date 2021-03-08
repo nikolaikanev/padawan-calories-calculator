@@ -13,11 +13,13 @@ const emptySpace = (space, times) => {
 // // console.log(Array(process.stdout.rows + 1).join('\n'));
 
 const nav = () => {
-  let Quit = "Q"
-  let Add = "A"
-  let quit = "|" + emptySpace(" ", 5) + Quit + " - " + "to quit" + emptySpace(" ", 5) + "|"
-  let add = "|" + emptySpace(" ", 5) + Add + " - " + "to add" + emptySpace(" ", 5) + "|"
-  return add + quit
+  let Quit = "Q - to quit"
+  let Add = "A - to add"
+  let Meals = "M - to see eaten meals"
+  let quit = "|" + emptySpace(" ", 10.5) + Quit + emptySpace(" ", 10.5) + "|"
+  let add = "|" + emptySpace(" ", 10) + Add + emptySpace(" ", 10) + "|"
+  let meals = "|" + emptySpace(" ", 5) + Meals + emptySpace(" ", 5) + "|"
+  return add + meals + quit
 }
 
 console.log(nav())

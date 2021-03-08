@@ -18,10 +18,10 @@ const getmeals = () => {
   return records
 }
 
+
 const mealsPage = () => {
   let meals = getmeals()
-
-  renderTable(meals, ["meal", "grams", "date"])
+  renderTable(meals, ["meal", "grams"])
 }
 
 module.exports = {

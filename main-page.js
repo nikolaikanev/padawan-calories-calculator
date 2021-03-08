@@ -96,11 +96,9 @@ const mainPage = () => {
 
   const enrichedMealsGroupedByDate = findDuplicatesAndSum(enrichedMeals)
   const theNewestArray = enrichedMealsGroupedByDateWithoutNameOfTheFoods(enrichedMealsGroupedByDate)
-  renderTable(theNewestArray, ["Date", "Calories", "Proteins", "Carbs", "Fats"])
+  renderTable(theNewestArray, ["Name", "Calories", "Proteins", "Carbs", "Fats"])
 }
 
 module.exports = {
   mainPage: mainPage
 }
-
-
