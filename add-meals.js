@@ -4,8 +4,8 @@ const fs = require('fs');
 const { get } = require('http');
 const readline = require("readline");
 const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+  input: process.stdin,
+  output: process.stdout
 })
 const renderTableObj = require('./functions.js')
 const renderTable = renderTableObj['renderTable']
@@ -14,8 +14,8 @@ const renderTable = renderTableObj['renderTable']
 
 let searchAnswers = []
 const findFoods = (foodSearch) => {
-  for(i = 0; i < foods.length; i = i + 1){
-    if ( foods[i][1].includes(foodSearch)) {
+  for (i = 0; i < foods.length; i = i + 1) {
+    if (foods[i][1].includes(foodSearch)) {
       searchAnswers.push(foods[i][1])
     }
   }
@@ -24,20 +24,37 @@ const findFoods = (foodSearch) => {
 
 
 let quantitysave
-const quantityCallback = (quantitysearch) => {
+const quantityCallback = (quantitysearch, afterCallback) => {
+  const callback = (answer) => {
+    searchMealCallback(answer, afterCallback)
+  }
   quantitysave = quantitysearch
-  rl.question("Enter meal? ", searchMealCallback)
+  rl.question("Enter meal? ", callback)
 }
 
+let date_ob = new Date()
 
-const mealCallback = (choice) => {
+// current day
+let date = ("0" + date_ob.getDate()).slice(-2);
+
+// current month
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+// current year
+let year = date_ob.getFullYear()
+
+currentDate = date + "/" + month + "/" + year
+
+
+const mealCallback = (choice, afterCallback) => {
   let choiceNumber = Number(choice)
-  for(i = 0; i < searchAnswers.length; i = i + 1) {
+  for (i = 0; i < searchAnswers.length; i = i + 1) {
     if (choiceNumber === i + 1) {
       const fs = require('fs');
-      let csvRoll ='"' + searchAnswers[i] + '"' + "," + quantitysave + "\n"
-      fs.appendFileSync("meals.csv", csvRoll, "UTF-8",{'flags': 'a+'});
-      renderTable(getmeals(), ["meal", "grams"])
+      let csvRoll = '"' + searchAnswers[i] + '"' + "," + quantitysave + "," + currentDate + "\n"
+      fs.appendFileSync("meals.csv", csvRoll, "UTF-8", { 'flags': 'a+' });
+
+      afterCallback()
     }
   }
 }
@@ -47,7 +64,7 @@ const getFoods = () => {
   const records = parse(data, {
     skip_empty_lines: true
   })
-return records
+  return records
 }
 
 let foods = getFoods()
@@ -63,20 +80,27 @@ const getmeals = () => {
 }
 
 
-const searchMealCallback = (mealSearch) => {
+const searchMealCallback = (mealSearch, afterCallback) => {
+  const callback = (answer) => {
+    mealCallback(answer, afterCallback)
+  }
   let foundFoods = findFoods(mealSearch)
   let productNumber = 0
-  for(i = 0; i < foundFoods.length; i = i + 1) {
+  for (i = 0; i < foundFoods.length; i = i + 1) {
     productNumber = 1 + productNumber
     let result = foundFoods[i]
-    console.log(productNumber.toString()+ "-" + result)
+    console.log(productNumber.toString() + "-" + result)
   }
-  rl.question("Choose number ", mealCallback)
+  rl.question("Choose number ", callback)
 }
 
-const addMeal = () => {
-  rl.question("Enter quantity ", quantityCallback)
+const addMeal = (afterCallback) => {
+  const callback = (answer) => {
+    quantityCallback(answer, afterCallback)
+  }
+  rl.question("Enter quantity ", callback) // quantityCallback
 }
+
 
 
 module.exports = {

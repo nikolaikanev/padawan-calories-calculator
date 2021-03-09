@@ -33,6 +33,19 @@ const getmeals = () => {
 
 }
 
+let date_ob = new Date()
+
+// current day
+let date = ("0" + date_ob.getDate()).slice(-2);
+
+// current month
+let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+
+// current year
+let year = date_ob.getFullYear()
+
+currentDate = date + "/" + month + "/" + year
+
 
 const enrichingMeals = (foods) => {
   const arr = []
@@ -45,7 +58,7 @@ const enrichingMeals = (foods) => {
         let resultPro = food[2] * (meal[1] / 100)
         let resultCarbs = food[3] * (meal[1] / 100)
         let resultFat = food[4] * (meal[1] / 100)
-        arr.push([meal[0], food[0], Math.round(resultCal), Math.round(resultPro), Math.round(resultCarbs), Math.round(resultFat)])
+        arr.push([meal[2], food[0], Math.round(resultCal), Math.round(resultPro), Math.round(resultCarbs), Math.round(resultFat)])
 
       }
     }
@@ -86,7 +99,6 @@ let findDuplicatesAndSum = (inputArr) => {
 };
 
 
-// move in the functions that needs it
 let meals = getmeals()
 
 // console.log(getFoods())
@@ -96,7 +108,7 @@ const mainPage = () => {
 
   const enrichedMealsGroupedByDate = findDuplicatesAndSum(enrichedMeals)
   const theNewestArray = enrichedMealsGroupedByDateWithoutNameOfTheFoods(enrichedMealsGroupedByDate)
-  renderTable(theNewestArray, ["Name", "Calories", "Proteins", "Carbs", "Fats"])
+  renderTable(theNewestArray, ["Date", "Calories", "Proteins", "Carbs", "Fats"])
 }
 
 module.exports = {

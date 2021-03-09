@@ -10,7 +10,8 @@ const mainPageObj = require("./main-page.js")
 const mainPage = mainPageObj['mainPage']
 const mealsPageObj = require("./meals-page.js")
 const mealsPage = mealsPageObj['mealsPage']
-const addMealsObj = require("./add-meals.js")
+const addMealsObj = require("./add-meals.js");
+const { clear } = require("console");
 const addMeal = addMealsObj['addMeal']
 
 
@@ -23,20 +24,28 @@ const emptySpace = (space, times) => {
 }
 
 const nav = () => {
-    let Quit = "Q - to quit"
-    let Add = "A - to add"
-    let Meals = "M - to see eaten meals"
-    let quit = "|" + emptySpace(" ", 10.5) + Quit + emptySpace(" ", 10.5) + "|"
-    let add = "|" + emptySpace(" ", 10) + Add + emptySpace(" ", 10) + "|"
-    let meals = "|" + emptySpace(" ", 5) + Meals + emptySpace(" ", 5) + "|"
-    return add + meals + quit
+    let Quit = "ctrl + q to quit"
+    let Add = "ctrl + a to add"
+    let Meals = "ctrl + w to meals"
+    let Overview = "ctrl + o to overview"
+    let buttonLength = 20
+    let emptySpaceLengthFirstButton = (buttonLength - Quit.length) / 2
+    let emptySpaceLengthSecondButton = (buttonLength - Quit.length) / 2
+    let emptySpaceLengthThirtButton = (buttonLength - Quit.length) / 2
+    let emptySpaceLengthFourthButton = (buttonLength - Quit.length) / 2
+
+    let quit = "|" + emptySpace(" ", emptySpaceLengthFirstButton) + Quit + emptySpace(" ", emptySpaceLengthFirstButton) + "|"
+    let add = "|" + emptySpace(" ", emptySpaceLengthSecondButton) + Add + emptySpace(" ", emptySpaceLengthSecondButton) + "|"
+    let meals = "|" + emptySpace(" ", emptySpaceLengthThirtButton) + Meals + emptySpace(" ", emptySpaceLengthThirtButton) + "|"
+    let overview = "|" + emptySpace(" ", emptySpaceLengthFourthButton) + Overview + emptySpace(" ", emptySpaceLengthFourthButton) + "|"
+    return add + meals + quit + overview
   }
   
 
 const renderPage = (page) => {
     console.clear()
     page()
-    console.log(emptySpace(" ", 500))
+    console.log(emptySpace(" ", 700))
     console.log(nav())
 }
 
@@ -45,16 +54,20 @@ const run = () => {
     process.stdin.setRawMode(true)
 
     process.stdin.on('keypress', function (_chunk, key) {
-        if (key && key.shift && key.name == 'q') process.exit()
-        if (key && key.shift && key.name == 'a') {
-            console.clear()
-            renderPage(addMeal)
+        if (key && key.ctrl && key.name == 'q') {
+          console.clear()
+          process.exit()
         }
-        // Show "M" in navigation
-        // Fix Meals table
-        // Use renderPage for the below
-        if (key && key.shift && key.name == 'm') {
+        if (key && key.ctrl && key.name == 'a') {
+            console.clear()
+            addMeal(() => { renderPage(mealsPage)})
+
+        }
+        if (key && key.ctrl && key.name == 'w') {
             renderPage(mealsPage)
+        }
+        if (key && key.ctrl && key.name == 'o') {
+            renderPage(mainPage)
         }
       })
 
