@@ -1,0 +1,26 @@
+{
+  "name": "padawan-calories-calculator",
+  "version": "1.0.0",
+  "description": "https://www.youtube.com/watch?v=nBkGemxXtpc&ab_channel=NikolaiKanev Building calories calculator.",
+  "main": "index.js",
+  "dependencies": {
+    "csv-parse": "^4.15.3",
+    "prompt": "^1.1.0",
+    "serverline": "^1.5.0",
+    "string-align": "^0.2.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nikolaikanev/padawan-calories-calculator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nikolaikanev/padawan-calories-calculator/issues"
+  },
+  "homepage": "https://github.com/nikolaikanev/padawan-calories-calculator#readme"
+}
