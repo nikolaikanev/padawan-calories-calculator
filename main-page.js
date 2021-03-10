@@ -47,7 +47,7 @@ let year = date_ob.getFullYear()
 currentDate = date + "/" + month + "/" + year
 
 
-const enrichingMeals = (foods) => {
+const enrichingMeals = (foods, meals) => {
   const arr = []
   for (let i = 0; i < meals.length; i = i + 1) {
     let meal = meals[i]
@@ -99,13 +99,13 @@ let findDuplicatesAndSum = (inputArr) => {
 };
 
 
-let meals = getmeals()
 
 // console.log(getFoods())
 const mainPage = () => {
   const foods = getFoods()
-  const enrichedMeals = enrichingMeals(foods)
-
+   const meals = getmeals()
+  const enrichedMeals = enrichingMeals(foods, meals)
+ 
   const enrichedMealsGroupedByDate = findDuplicatesAndSum(enrichedMeals)
   const theNewestArray = enrichedMealsGroupedByDateWithoutNameOfTheFoods(enrichedMealsGroupedByDate)
   renderTable(theNewestArray, ["Date", "Calories", "Proteins", "Carbs", "Fats"])
