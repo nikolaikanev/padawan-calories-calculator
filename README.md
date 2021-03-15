@@ -1,6 +1,6 @@
 # padawan-calories-calculator
 
-- [!](https://j.gifs.com/XL33og.gif)](https://www.youtube.com/watch?v=nBkGemxXtpc&ab_channel=NikolaiKanev)
+- [![](https://j.gifs.com/XL33og.gif)](https://www.youtube.com/watch?v=nBkGemxXtpc&ab_channel=NikolaiKanev)
 
 
 ### Setup
