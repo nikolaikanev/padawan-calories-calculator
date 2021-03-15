@@ -6,9 +6,11 @@
 ## Setup
 1. You must have install *node.js* and *npm*.
 2. Open project directory and run:
-```npm install
+```
+npm install
 ```
 3. Start the program:
-```npm run start
+```
+npm run start
 ```
 
